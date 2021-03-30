@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
-public class AnalyticServiceImpl implements IAnalyticService{
+public class AnalyticServiceImpl implements IAnalyticService {
     @Autowired
     AnalyticRepository repository;
 

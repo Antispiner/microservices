@@ -13,7 +13,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: 1418
-    url: jdbc:postgresql://localhost/analytic
+    url: jdbc:postgresql://localhost/analytic?currentSchema=analytic
     platform: analytic
     initialization-mode: always
     continue-on-error: true

@@ -1,5 +1,6 @@
 package com.core.analytics.config;
 
+import com.core.analytics.service.IAnalyticService;
 import com.core.analytics.service.RabbitMQListener;
 
 import org.springframework.amqp.core.Queue;
@@ -9,6 +10,7 @@ import org.springframework.amqp.rabbit.listener.MessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +28,9 @@ public class RabbitMQConfig {
 
     @Value("${analytics.rabbitmq.url}")
     private String url;
+
+    @Autowired
+    IAnalyticService analyticService;
 
     @Bean
     Queue queue() {
@@ -53,7 +58,7 @@ public class RabbitMQConfig {
         simpleMessageListenerContainer.setConnectionFactory(connectionFactory());
         simpleMessageListenerContainer.setQueues(queue());
         simpleMessageListenerContainer.setMessageConverter(jsonMessageConverter());
-        simpleMessageListenerContainer.setMessageListener(new RabbitMQListener());
+        simpleMessageListenerContainer.setMessageListener(new RabbitMQListener(analyticService));
         return simpleMessageListenerContainer;
 
     }
