@@ -1,6 +1,6 @@
 package com.core.analytics.config;
 
-import com.core.analytics.CustomUserInfoTokenServices;
+import com.core.analytics.service.security.CustomUserInfoTokenServices;
 import feign.RequestInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;

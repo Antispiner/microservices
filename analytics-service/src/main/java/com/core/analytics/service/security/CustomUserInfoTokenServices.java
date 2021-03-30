@@ -1,4 +1,4 @@
-package com.core.analytics;
+package com.core.analytics.service.security;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

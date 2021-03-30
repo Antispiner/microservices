@@ -8,3 +8,18 @@ spring:
       password: password
       username: user
 
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 1418
+    url: jdbc:postgresql://localhost/analytic
+    platform: analytic
+    initialization-mode: always
+    continue-on-error: true
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    database: postgresql
