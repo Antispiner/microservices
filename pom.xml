@@ -13,6 +13,9 @@
         <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
+        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <parent>
@@ -40,8 +43,6 @@
         <module>eureka</module>
         <module>gateway</module>
         <module>analytics-service</module>
-        <module>turbine-stream-service</module>
-        <module>monitoring</module>
     </modules>
 
 </project>

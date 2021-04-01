@@ -13,8 +13,12 @@ public class RabbitMQListener implements MessageListener {
     }
 
     public void onMessage(Message message) {
-        System.out.println("Consuming Message - " + new String(message.getBody()));
-        analyticService.processMessage(new String(message.getBody()));
+        try {
+            System.out.println("Consuming Message - " + new String(message.getBody()));
+            analyticService.processMessage(new String(message.getBody()));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }
