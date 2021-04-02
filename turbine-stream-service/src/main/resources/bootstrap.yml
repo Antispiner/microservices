@@ -12,8 +12,12 @@ eureka:
   client:
     fetchRegistry: false
     register-with-eureka: false
-
-
-turbine:
-  appConfig: WRITING,READING
-  clusterNameExpression: new String('default')
+management:
+  endpoints:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+    web:
+      exposure:
+        include: "*"
