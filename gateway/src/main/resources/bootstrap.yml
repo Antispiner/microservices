@@ -7,3 +7,11 @@ spring:
       fail-fast: true
       password: password
       username: user
+
+eureka:
+  client:
+   fetchRegistry: true
+
+feign:
+  hystrix:
+    enabled: true

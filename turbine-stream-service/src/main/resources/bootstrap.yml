@@ -7,3 +7,13 @@ spring:
       fail-fast: true
       password: password
       username: user
+
+eureka:
+  client:
+    fetchRegistry: false
+    register-with-eureka: false
+
+
+turbine:
+  appConfig: WRITING,READING
+  clusterNameExpression: new String('default')
