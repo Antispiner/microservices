@@ -4,11 +4,11 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 10000
+            timeoutInMilliseconds: 20000
 
 ribbon:
-  ReadTimeout: 2000
-  ConnectTimeout: 2000
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
 
 zuul:
   ignoredServices: '*'

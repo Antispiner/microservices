@@ -10,7 +10,7 @@
 	<name>monitoring</name>
 
 	<parent>
-		<groupId>com.Core</groupId>
+		<groupId>com.core</groupId>
 		<artifactId>microservices</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
