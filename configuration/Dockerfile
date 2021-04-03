@@ -1,4 +1,4 @@
-FROM java:11-jre
+FROM adoptopenjdk:11-jre-hotspot
 MAINTAINER Koshman Vadim
 
 ADD ./target/configuration.jar /app/
