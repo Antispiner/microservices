@@ -5,13 +5,14 @@ spring:
     config:
       uri: http://localhost:8888
       fail-fast: true
-      password: password
+      password: ${CONFIG_SERVICE_PASSWORD}
       username: user
 
 eureka:
   client:
     fetchRegistry: false
     register-with-eureka: false
+
 management:
   endpoints:
     metrics:
