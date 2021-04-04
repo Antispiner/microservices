@@ -3,21 +3,29 @@ spring:
     name: analytics-service
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://config:8888
       fail-fast: true
-      password: password
+      password: ${CONFIG_SERVICE_PASSWORD}
       username: user
 
 
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: 1418
-    url: jdbc:postgresql://localhost/analytic?currentSchema=analytic
-    platform: analytic
-    initialization-mode: always
-    continue-on-error: true
-  jpa:
-    show-sql: true
-    generate-ddl: true
-    database: postgresql
+#  datasource:
+#    driver-class-name: org.postgresql.Driver
+#    username: postgres
+#    password: ${POSTGRES_PASSWORD}
+#    url: jdbc:postgresql://postgres/analytic?currentSchema=analytic
+#    platform: analytic
+#    initialization-mode: always
+#    continue-on-error: true
+#  jpa:
+#    show-sql: true
+#    generate-ddl: true
+#    database: postgresql
+
+eureka:
+  client:
+    fetchRegistry: true
+
+feign:
+  hystrix:
+    enabled: true

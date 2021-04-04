@@ -1,0 +1,110 @@
+version: '3.8'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    restart: always
+    ports:
+      - 15672:15672
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  postgres:
+    image: postgres
+    restart: always
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: analytic
+
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    volumes:
+    - pgadmin:/root/.pgadmin
+    ports:
+      - 5050:80
+    networks:
+      - postgres
+
+  config:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+    build:
+      context: ./configuration
+    image: antispiner/configuration
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  eureka:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+    build:
+      context: ./eureka
+    image: antipiner/eureka
+    restart: always
+    depends_on:
+      config:
+        condition: service_healthy
+    ports:
+        - 8761:8761
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  gateway:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+    build:
+      context: ./gateway
+    image: antipiner/gateway
+    restart: always
+    depends_on:
+      config:
+        condition: service_healthy
+    ports:
+      - 4000:4000
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  analytics-service:
+    environment:
+        CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+        SPRING_DATASOURCE_URL: jdbc:postgresql://postgres/analytic
+        SPRING_DATASOURCE_USERNAME: postgres
+        SPRING_DATASOURCE_PASSWORD: 1418
+        SPRING_JPA_HIBERNATE_DDL_AUTO: create
+    build:
+      context: ./analytics-service
+    image: antipiner/analytics-service
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - 6000:6000
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+  postgres:
+  pgadmin:
