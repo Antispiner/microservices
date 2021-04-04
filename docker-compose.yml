@@ -13,6 +13,11 @@ services:
   postgres:
     image: postgres
     restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
       - postgres:/var/lib/postgresql/data
     ports:
@@ -72,7 +77,7 @@ services:
     image: antipiner/gateway
     restart: always
     depends_on:
-      config:
+      eureka:
         condition: service_healthy
     ports:
       - 4000:4000
@@ -93,7 +98,10 @@ services:
     image: antipiner/analytics-service
     restart: always
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
+      gateway:
+        condition: service_healthy
     ports:
       - 6000:6000
     logging:
