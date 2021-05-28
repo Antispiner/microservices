@@ -41,7 +41,6 @@
         <module>gateway</module>
         <module>analytics-service</module>
         <module>monitoring</module>
-        <module>turbine-stream-service</module>
     </modules>
 
 </project>

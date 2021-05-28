@@ -23,5 +23,18 @@ zuul:
         stripPrefix: false
         sensitiveHeaders:
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus, info
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+
 server:
   port: 4000
