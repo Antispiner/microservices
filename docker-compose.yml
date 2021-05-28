@@ -141,13 +141,13 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     build:
       context: ./monitoring
-    image: antipiner/monitoring
+    image: antispiner/monitoring
     restart: always
     depends_on:
       gateway:
         condition: service_healthy
     ports:
-      - 8282:8282
+      - 9898:9898
     logging:
       options:
         max-size: "10m"
